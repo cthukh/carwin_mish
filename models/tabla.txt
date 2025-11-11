@@ -1,0 +1,11 @@
+CREATE TABLE CITAS(
+    id_cita INTEGER GENERATED ALWAYS AS IDENTITY PRIMARY KEY,
+    nombre_cliente VARCHAR2(100),
+    rut_cliente VARCHAR(50),
+    fecha_cita DATE,
+    marca_vehiculo VARCHAR2(50),
+    modelo_vehiculo VARCHAR2(100),
+    estado_cita VARCHAR2(80) DEFAULT 'pendiente' NOT NULL ,
+    patente_vehiculo VARCHAR(20),
+    fono_cliente VARCHAR(20)
+);
