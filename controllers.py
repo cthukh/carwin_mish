@@ -132,6 +132,7 @@ def form_actualizar_estado():
     if id_busq != "":
         cita = Cita()
         cit = cita.buscarIdCita(id_busq)
+        
         if not cit:
             print("No se encontro cita con ese id...")
 
