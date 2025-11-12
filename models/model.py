@@ -97,3 +97,14 @@ class Cita:
                          pat = self.patente_vehiculo)
         c.conexion.commit()
     
+    def editarEstadoCita(self):
+        c = ConexionBD()
+        sql = """
+                UPDATE citas
+                SET estado_cita = :estado
+                WHERE id_cita = :id
+            """
+        c.cursor.execute(sql,
+                         id = self.id_cita,
+                         estado = self.estado_cita)
+        c.conexion.commit()

@@ -1,4 +1,4 @@
-from controllers import form_agregar_cita, form_editar_cita, buscar_todos
+from controllers import form_agregar_cita, form_editar_cita, buscar_todos, form_actualizar_estado
 import os
 
 while True:
@@ -10,11 +10,12 @@ while True:
     "1- Agregar cita \n" \
     "2- Editar cita \n" \
     "3- Ver todas las citas \n" \
+    "4- Actualizar estado de cita \n" \
     "0- salir")
 
     opt = int(input("Ingrese opción -> "))
 
-    while opt < 0 or opt > 3:
+    while opt < 0 or opt > 4:
         opt = int(input("Ingrese opción valida (0-3) -> "))
 
 
@@ -47,6 +48,15 @@ while True:
         print("===========================")
         salir = input("Para volver, presione ENTER ")
 
+    elif opt == 4:
+        # Camnbiar estado cita
+        os.system("cls")
+        print("==== Actualizar estado cita ====")
+        form_actualizar_estado()
+
+
+        print("===========================")
+        salir = input("Para volver, presione ENTER ")
 
     elif opt == 0:
         # salir

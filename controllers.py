@@ -1,5 +1,6 @@
 from models.model import Cita
 
+import datetime
 
 def verifRut(rut):
     rut = rut.strip().replace(".","").replace("-","")
@@ -124,20 +125,55 @@ def form_editar_cita():
         print("==============================")
         print("Cita actualizada")
 
+def form_actualizar_estado():
+    print("(Para volver y ver los registros, deje el espacio ID sin responder)")
 
+    id_busq = input("Ingrese la id de la cita para actualizar: ")
+    if id_busq != "":
+        cita = Cita()
+        cit = cita.buscarIdCita(id_busq)
+        if not cit:
+            print("No se encontro cita con ese id...")
+
+        elif cita:
+            print("-- Cita encontrada --")
+            print(f"Cliente: {cita.nombre_cliente}")
+            print(f"Vehiculo: {cita.marca_vehiculo} {cita.modelo_vehiculo} ")
+            print(f"Patente: {cita.patente_vehiculo}")
+            print(f"\n estado cita: {cita.estado_cita}")
+            
+            estado = input(f"Ingrese nuevo estado \n1-Pendiente \n2-Completada \nCancelada)")
+
+            if estado == 1:
+                cita.estado_cita = "Pendiente"
+                cita.editarEstadoCita()
+
+            elif estado == 2:
+                cita.estado_cita = "Completada"
+                cita.editarEstadoCita()
+
+            elif estado == 3:
+                cita.estado_cita = "Cancelada"
+                cita.editarEstadoCita()
+
+            print("Estado de cita cambiado")
+
+        
 
 def buscar_todos():
+
     # buscar todos los registros de citas
     cita = Cita()
     lista = cita.buscarTodos()
     if lista:
         for cita in lista:
+            fecha = cita[4].strftime("%d-%m-%Y")
             print("===========================")
             print(f"id cita: {cita[0]} \n"\
                     f"Cliente: {cita[1]} \n"\
                     f"rut: {cita[2]} \n"\
                     f"teléfono: {cita[3]} \n"\
-                    f"Fecha cita: {cita[4].strftime("%d-%m-%Y")} \n"\
+                    f"Fecha cita: {fecha} \n"\
                     f"Vehiculo: {cita[5]} \n"\
                     f"Modelo: {cita[6]} \n"\
                     f"Patente: {cita[7]} \n"\
