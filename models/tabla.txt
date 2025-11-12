@@ -1,7 +1,7 @@
 CREATE TABLE CITAS(
     id_cita INTEGER GENERATED ALWAYS AS IDENTITY PRIMARY KEY,
     nombre_cliente VARCHAR2(100),
-    rut_cliente VARCHAR(50),
+    rut_cliente VARCHAR(50) UNIQUE,
     fecha_cita DATE,
     marca_vehiculo VARCHAR2(50),
     modelo_vehiculo VARCHAR2(100),
@@ -9,3 +9,49 @@ CREATE TABLE CITAS(
     patente_vehiculo VARCHAR(20),
     fono_cliente VARCHAR(20)
 );
+
+
+    def __init__(self,
+                 nombre_cliente:str,
+                 rut_cliente:str,
+                 fono_cliente:str,
+                 fecha_cita:str,
+                 marca_vehiculo:str,
+                 modelo_vehiculo:str,
+                 patente_vehiculo:str,
+                 estado_cita:str):
+        self.nombre_cliente   = nombre_cliente
+        self.rut_cliente      = rut_cliente
+        self.fono_cliente     = fono_cliente
+        self.fecha_cita       = fecha_cita
+        self.marca_vehiculo   = marca_vehiculo
+        self.modelo_vehiculo  = modelo_vehiculo
+        self.patente_vehiculo = patente_vehiculo
+        self.estado_cita      = estado_cita
+
+
+
+-------------------------------------------------------------------------------------
+
+CREATE TABLE CLIENTES (
+    id_cliente INTEGER GENERATED ALWAYS AS IDENTITY PRIMARY KEY,
+    nombre_cliente VARCHAR2(100),
+    fono_cliente VARCHAR(20),
+    rut_cliente VARCHAR2(50) UNIQUE
+);
+
+
+CREATE TABLE CITAS(
+    id_cita INTEGER GENERATED ALWAYS AS IDENTITY PRIMARY KEY,
+    id_cliente INTEGER
+        CONSTRAINT cli_cit_nn NOT NULL, FOREIGN KEY (id_cliente)
+        REFERENCES clientes (id_cliente),
+    fecha_cita DATE,
+    marca_vehiculo VARCHAR2(50),
+    modelo_vehiculo VARCHAR2(100),
+    estado_cita VARCHAR2(80) DEFAULT 'pendiente' NOT NULL ,
+    patente_vehiculo VARCHAR(20)
+);
+
+commit;
+
